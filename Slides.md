@@ -37,30 +37,75 @@ git push -u origin master
 
 ---
 
-## Commiting and pushing to a repository
+## Putting work on Github
 
-### Pushing a particular file to a github repo
+3 steps moving work from your machine onto GitHub:
+1. [Stage](#stage-work) your local work
+1. [Commit](#commit-work) files you staged
+1. [Push](#push) a local commit to GitHub
 
+A minimal example to add file `${file}`
 ```
 git add ${file}
-git status # check only ${file} is staging
 git commit -m "Message about why you made the change"
 git push
 ```
+To save all changes, see [this slide](#push-all-changes).
+
+For more details, look at the [staging](#stage-work), [committing](#commit-work), and [pushing](#push)
+
+~~~ 
+
+### Stage work
+
+Git allows you to group and upload the files that are ready, while still keeping changes for things that you are still working on.
+
+* Staged files are ready to join the next commit.
+* They are not commited until you [commit](#commit-work) them
+
+To stage a file, run
+```
+git add ${file}
+```
+
+Now you are ready to [`commit`](#commit-work) the changes.
+ 
+* Use `git status` to see what is staged and what isn't
+* Use `git commit -m "message"` to commit everything staged
+* See [unstaging](#unstaging-a-file) to unstage a file.
+
 
 ~~~
 
-### Push everything to a github repo
+### Commit work
+
+You commit everything that is staged together. You will log a message, and be able to rewind to a previous commit.
+
+Running `git status` will tell you what is staged.
+
+Running
+```
+git commit -m "Message"
+```
+will commit all staged files.
+
+
+~~~
+
+### Push all changes
 
 ```
 git add -A
 git commit -m "Message about why you made the change"
+git push
 ```
 
 OR
 
 ```
-git commit -am "commit message" # only commits recently changed files
+# do in one line (misses untracked files)
+git commit -am "commit message" 
+git push
 ```
 
 ---
@@ -109,7 +154,53 @@ If there are changes to your current branch, you should [commit]() them first, o
 
 ## Merging
 
-### Moving changes to a new branch
+_Merging_ is how you move your work on its own branch back into other branches.
+
+Suppose you have been working on `feature_branch`, and you are ready to merge it with `master_branch` (i.e. you want to incorportate your changes back into master). Before starting with the actual merge, we have to commit everything in our `feature_branch`:
+```
+git branch feature_branch # make sure we are on feature branch
+git add .
+git commit -m "Ready to merge with master"
+```
+
+With this out of the way, we are ready to merge (press down)
+
+~~~
+
+### Merging into master
+
+You want to merge your changes in `feature_branch` into `master`. 
+
+```
+git checkout master
+git pull # gets most recent master 
+git merge feature_branch # does actual merge
+```
+
+If there are no merge conflicts, this completes the merge!
+
+If you do have merge conflicts, the most common options for resolving them are:
+* [Keep theirs](#merge-conflict-keep-theirs): When there are competing merges, keep the version currently on `master`.
+* [Keep ours](#merge-conflict-keep-ours): When there are competing merges, keep the version current on `feature_branch`.
+* [Pick'n'choose](#merge-conflict-general): Resolve the merge conflicts manually.
+
+~~~
+
+### Merge conflict: keep theirs
+
+You tried to merge  
+```
+git checkout master
+git pull
+git merge feature_branch
+```
+~~~
+
+### Merge conflict: keep ours
+
+~~~
+
+### Merge conflict: general
 
 ---
 
