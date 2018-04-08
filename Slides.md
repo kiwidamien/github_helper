@@ -40,10 +40,10 @@ git push -u origin master
 
 ## Putting work on Github
 <!-- .slide: id="push-overview" -->
-3 steps moving work from your machine onto GitHub:
-1. [Stage](#stage-work) your local work
-1. [Commit](#commit-work) files you staged
-1. [Push](#push) a local commit to GitHub
+3 steps to move work from your machine onto GitHub:
+1. [Stage](#/push-stage) your local work
+1. [Commit](#/push-commit) files you staged
+1. [Push](#/push-all) a local commit to GitHub
 
 A minimal example to add file `${file}`
 ```
@@ -53,28 +53,31 @@ git push
 ```
 To save all changes, see [this slide](#/push-all).
 
-For more details, look at the [staging](#/push-stage), [committing](#/push-commit), and [pushing](#/push)
+Details about each step below.
 
 ~~~ 
 
 ### Stage work
 <!-- .slide: id="push-stage" -->
+<small>
 Git allows you to group and upload the files that are ready, while still keeping changes for things that you are still working on.
+</small>
 
 * Staged files are ready to join the next commit.
 * They are not commited until you [commit](#/push-commit) them
 
 To stage a file, run
-```
+```bash
 git add ${file}
 ```
 
 Now you are ready to [`commit`](#/push-commit) the changes.
- 
+<small> 
 * Use `git status` to see what is staged and what isn't
 * Use `git commit -m "message"` to commit everything staged
 * See [unstaging](#unstaging-a-file) to unstage a file.
 
+</small>
 
 ~~~
 
@@ -113,7 +116,7 @@ git t push --set-upstream origin feature_branch
 ### Push all changes
 <!-- .slide: id="push-all" -->
 
-```
+```bash
 git add -A
 git commit -m "Message about why you made the change"
 git push
@@ -121,7 +124,7 @@ git push
 
 OR
 
-```
+```bash
 # do in two lines (misses untracked files)
 git commit -am "commit message" 
 git push
@@ -134,10 +137,19 @@ git push
 
 ### What branch am I on?
 
-```
+This command lists all branches, and places an asterisk by the branch you are on
+
+```bash
 git branch
 ```
 
+Sample output:
+```bash
+* feature1
+  feature2
+  gh-pages
+  master
+```
 ~~~
 
 ### How do I make a new branch?
@@ -179,7 +191,7 @@ If there are changes to your current branch, you should [commit]() them first, o
 <!-- .slide: id="merge-overview" -->
 
 To merge your work from `feature_branch` back into `master`, we first have to make sure `feature_branch` is committed:
-```
+```bash
 git branch feature_branch # make sure we are on feature branch
 git add .
 git commit -m "Ready to merge with master"
@@ -193,7 +205,7 @@ With this out of the way, we are ready to merge (press down)
 <!-- .slide: id="merge-basic" -->
 
 To merge your changes in `feature_branch` into `master`: 
-```
+```bash
 git checkout master
 git pull # gets most recent master 
 git merge feature_branch # does actual merge
@@ -219,20 +231,35 @@ If you do have merge conflicts, the most common options for resolving them are:
 <!-- .slide: id="merge-conflict-keep-theirs" -->
 
 You tried to merge  
-```
+```bash
 git checkout master
 git pull
 git merge feature_branch
 ```
 and got a merge conflict. We want to merge our branch, but if there is a conflict use the *master* branch:
-```
+```bash
 # still on master from above
+git merge --abort # throw away broken merge
 git merge -X theirs feature_branch
 ``` 
+
 ~~~
 
 ### Merge conflict: keep ours
 <!-- .slide: id="merge-conflict-keep-ours" -->
+
+You tried to merge
+```bash
+git checkout master
+git pull
+git merge feature_branch
+```
+and got a merge conflict. We want to merge our branch, but if there is a conflict use the *feature_branch*:
+```bash
+# still on master from above
+git merge --abort # throw away broken merge
+git merge -X ours feature_branch
+``` 
 
 ~~~
 
@@ -243,8 +270,9 @@ git merge -X theirs feature_branch
 
 ## Undoing
 <!-- .slide: id="undo" -->
-
+~~~
 ### Unstaging a file
+<!-- .slide: id="undo-staging" -->
 
 Suppose that `contributing.md` has been modified and added, so that `git status` returns
 ```
