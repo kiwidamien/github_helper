@@ -23,6 +23,7 @@ Variables:
 ---
 
 ## Making a new repository
+<!-- .slide: id="new-repo" -->
 
 ```
 mkdir ${repositoryDirectory}
@@ -38,7 +39,7 @@ git push -u origin master
 ---
 
 ## Putting work on Github
-
+<!-- .slide: id="push-overview" -->
 3 steps moving work from your machine onto GitHub:
 1. [Stage](#stage-work) your local work
 1. [Commit](#commit-work) files you staged
@@ -57,7 +58,7 @@ For more details, look at the [staging](#stage-work), [committing](#commit-work)
 ~~~ 
 
 ### Stage work
-
+<!-- .slide: id="push-stage" -->
 Git allows you to group and upload the files that are ready, while still keeping changes for things that you are still working on.
 
 * Staged files are ready to join the next commit.
@@ -78,6 +79,7 @@ Now you are ready to [`commit`](#commit-work) the changes.
 ~~~
 
 ### Commit work
+<!-- .slide: id="push-commit" -->
 
 You commit everything that is staged together. You will log a message, and be able to rewind to a previous commit.
 
@@ -93,6 +95,7 @@ will commit all staged files.
 ~~~
 
 ### Push all changes
+<!-- .slide: id="push-all" -->
 
 ```
 git add -A
@@ -111,6 +114,7 @@ git push
 ---
 
 ## Branches
+<!-- .slide: id="branch-overview" -->
 
 ### What branch am I on?
 
@@ -121,6 +125,8 @@ git branch
 ~~~
 
 ### How do I make a new branch?
+<!-- .slide: id="branch-new-branch" -->
+
 To make a new branch (but stay on the same branch)
 ```
 git branch new_branch_name
@@ -134,6 +140,7 @@ git checkout -b new_branch_name
 ~~~
 
 ### How do I switch branches?
+<!-- .slide: id="branch-switch-branch" -->
 
 If there are no changes to your current branch:
 ```
@@ -153,6 +160,7 @@ If there are changes to your current branch, you should [commit]() them first, o
 ---
 
 ## Merging
+<!-- .slide: id="merge-overview" -->
 
 _Merging_ is how you move your work on its own branch back into other branches.
 
@@ -168,6 +176,7 @@ With this out of the way, we are ready to merge (press down)
 ~~~
 
 ### Merging into master
+<!-- .slide: id="merge-basic" -->
 
 You want to merge your changes in `feature_branch` into `master`. 
 
@@ -187,6 +196,7 @@ If you do have merge conflicts, the most common options for resolving them are:
 ~~~
 
 ### Merge conflict: keep theirs
+<!-- .slide: id="merge-keep-theirs" -->
 
 You tried to merge  
 ```
@@ -197,14 +207,17 @@ git merge feature_branch
 ~~~
 
 ### Merge conflict: keep ours
+<!-- .slide: id="merge-keep-ours" -->
 
 ~~~
 
 ### Merge conflict: general
+<!-- .slide: id="merge-pick-and-choose" -->
 
 ---
 
 ## Undoing
+<!-- .slide: id="undo" -->
 
 ### Unstaging a file
 
@@ -246,6 +259,7 @@ The file `contributing.md` is still modified, but it is now _unstaged_.
 ~~~
 
 ### Throw away all local changes, and restore my local copy back to most recent commit
+<!-- .slide: id="undo-to-most-recent-commit" -->
 
 Suppose you have modified `contributing.md`, and it is unstaged:
 ```
@@ -267,8 +281,9 @@ If your file has been staged, you will want to follow the instructions for [unst
 ~~~
 
 ### Throw away all local changes, and restore my local copy back to a particular commit
+<!-- .slide: id="undo-to-given-commit" --> 
 
-Go to [merging](#merging)
+Go to [merging](#/merging)
 
 
 
