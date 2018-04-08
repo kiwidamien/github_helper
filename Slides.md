@@ -51,9 +51,9 @@ git add ${file}
 git commit -m "Message about why you made the change"
 git push
 ```
-To save all changes, see [this slide](#push-all-changes).
+To save all changes, see [this slide](#/push-all).
 
-For more details, look at the [staging](#stage-work), [committing](#commit-work), and [pushing](#push)
+For more details, look at the [staging](#/push-stage), [committing](#/push-commit), and [pushing](#/push)
 
 ~~~ 
 
@@ -62,14 +62,14 @@ For more details, look at the [staging](#stage-work), [committing](#commit-work)
 Git allows you to group and upload the files that are ready, while still keeping changes for things that you are still working on.
 
 * Staged files are ready to join the next commit.
-* They are not commited until you [commit](#commit-work) them
+* They are not commited until you [commit](#/push-commit) them
 
 To stage a file, run
 ```
 git add ${file}
 ```
 
-Now you are ready to [`commit`](#commit-work) the changes.
+Now you are ready to [`commit`](#/push-commit) the changes.
  
 * Use `git status` to see what is staged and what isn't
 * Use `git commit -m "message"` to commit everything staged
@@ -94,6 +94,22 @@ will commit all staged files.
 
 ~~~
 
+### Push current commit
+
+If you have already [staged](#/push-stage) and [committed](#/push-commit) your work, you need to push it to github:
+```
+# Do this while on feature_branch
+git push
+```
+
+#### Possible complication
+If this is your first push of this branch, GitHub will need you to it which branch you are pushing to. It tells you the command to run:
+```
+git t push --set-upstream origin feature_branch
+```  
+
+~~~
+
 ### Push all changes
 <!-- .slide: id="push-all" -->
 
@@ -106,7 +122,7 @@ git push
 OR
 
 ```
-# do in one line (misses untracked files)
+# do in two lines (misses untracked files)
 git commit -am "commit message" 
 git push
 ```
@@ -162,9 +178,7 @@ If there are changes to your current branch, you should [commit]() them first, o
 ## Merging
 <!-- .slide: id="merge-overview" -->
 
-_Merging_ is how you move your work on its own branch back into other branches.
-
-Suppose you have been working on `feature_branch`, and you are ready to merge it with `master_branch` (i.e. you want to incorportate your changes back into master). Before starting with the actual merge, we have to commit everything in our `feature_branch`:
+To merge your work from `feature_branch` back into `master`, we first have to make sure `feature_branch` is committed:
 ```
 git branch feature_branch # make sure we are on feature branch
 git add .
@@ -178,8 +192,7 @@ With this out of the way, we are ready to merge (press down)
 ### Merging into master
 <!-- .slide: id="merge-basic" -->
 
-You want to merge your changes in `feature_branch` into `master`. 
-
+To merge your changes in `feature_branch` into `master`: 
 ```
 git checkout master
 git pull # gets most recent master 
@@ -188,15 +201,22 @@ git merge feature_branch # does actual merge
 
 If there are no merge conflicts, this completes the merge!
 
+If git cannot figure out how to merge the files, you will need to resolve the [merge conflict](#/merge-conflict-overview) (press down)
+
+~~~
+
+### Merge conflict overview
+<!-- .slide: id="merge-conflict-overview" -->
+
 If you do have merge conflicts, the most common options for resolving them are:
-* [Keep theirs](#merge-conflict-keep-theirs): When there are competing merges, keep the version currently on `master`.
-* [Keep ours](#merge-conflict-keep-ours): When there are competing merges, keep the version current on `feature_branch`.
-* [Pick'n'choose](#merge-conflict-general): Resolve the merge conflicts manually.
+* [Keep theirs](#/merge-conflict-keep-theirs): When there are competing merges, keep the version currently on `master`.
+* [Keep ours](#/merge-conflict-keep-ours): When there are competing merges, keep the version current on `feature_branch`.
+* [Pick'n'choose](#/merge-conflict-general): Resolve the merge conflicts manually.
 
 ~~~
 
 ### Merge conflict: keep theirs
-<!-- .slide: id="merge-keep-theirs" -->
+<!-- .slide: id="merge-conflict-keep-theirs" -->
 
 You tried to merge  
 ```
@@ -204,15 +224,20 @@ git checkout master
 git pull
 git merge feature_branch
 ```
+and got a merge conflict. We want to merge our branch, but if there is a conflict use the *master* branch:
+```
+# still on master from above
+git merge -X theirs feature_branch
+``` 
 ~~~
 
 ### Merge conflict: keep ours
-<!-- .slide: id="merge-keep-ours" -->
+<!-- .slide: id="merge-conflict-keep-ours" -->
 
 ~~~
 
 ### Merge conflict: general
-<!-- .slide: id="merge-pick-and-choose" -->
+<!-- .slide: id="merge-conflict-general" -->
 
 ---
 
@@ -284,7 +309,5 @@ If your file has been staged, you will want to follow the instructions for [unst
 <!-- .slide: id="undo-to-given-commit" --> 
 
 Go to [merging](#/merging)
-
-
 
 
