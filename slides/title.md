@@ -1,11 +1,11 @@
 # Github helper
 
-## Story mode: 
-[git guide](http://rogerdudler.github.io/git-guide/)
+* [Making a new repository](#/new-repo)
+* [Putting work on GitHub](#/push-overview)
+* [Branches](#/branch-overview)
+* [Merging](#/merge-overview)
+* [Undoing](#/undo)
+* [Other resources](#/other-resources)
 
-Variables:
-* ${repositoryDirectory}
-* ${repositoryName}
-* ${username}
-* ${existing_branch_name}
+Press **Esc** at any time to navigate through slides
 

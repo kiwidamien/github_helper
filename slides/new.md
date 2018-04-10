@@ -1,7 +1,7 @@
 ## Making a new repository
 <!-- .slide: id="new-repo" -->
 
-```
+```bash
 mkdir ${repositoryDirectory}
 cd ${repositoryDirectory}
 echo "# ${repositoryName}" >> README.md
