@@ -1,74 +1,74 @@
 ## Undoing
 <!-- .slide: id="undo" -->
-* How to [unstage a file](#/undo-staging), so the file won't be in the commit.
+* How to [unstage a file](#/undo-staging-single), or [multiple files](#/undo-staging-mutiple) so the file won't be in the commit.
+* How to [revert changes to a single file](#/undo-revert-file)
 * How to [revert changes to last commit](#/undo-to-most-recent-commit)
 * How to [revert changes to arbitrary commit](#/undo-to-arbitrary-commit)
 
 ~~~
 ### Unstaging a file
-<!-- .slide: id="undo-staging" -->
+<!-- .slide: id="undo-staging-single" -->
+Problem: The file `new_file.txt` is staged, but we don't want it in the next commit
 
-`git status` tells us the that 3 files are ready for staging:
+Solution:
+```
+git reset HEAD new_file.txt
+```
 
+Note: 
+`git status` will remind you of this command:
 ```
 On branch my_branch
 Changes to be committed:
-  (use "git reset HEAD <file>..." to unstage)
-
-  modified:   contributing.md
-              something_else.txt
-              analysis.py
-```
-If we want to commit everything except `contributing.md`, we first need to *unstage* `contributing.md`.
-```
-git reset HEAD contributing.md
-``` 
-
-After this, `git status` yields
-```
-On branch my_branch
-Changes to be committed:
-  (use "git reset HEAD <file>..." to unstage)
-
-  modified    something_else.txt
-              analysis.py
-
-Changes not staged for commit:
-  (use "git add <file>..." to update what will be committed)
-  (use "git checkout -- <file>..." to discard changes in the working directory)
-
-  modified:   contributing.md
+  (use "git reset HEAD <file> ...." to unstage)
+...
 ```
 
-The file `contributing.md` is still modified, but it is now _unstaged_.
+~~~
+### Unstage all files
+<!-- .slide: id="undo-staging-multiple" -->
+
+Problem: We want to unstage all our files, so we can start choosing what to stage again 
+
+Solution:
+```
+git reset
+```
 
 ~~~
 
-### Throw away all local changes, and restore my local copy back to most recent commit
+### Undo changes to a file since last commit
+<!-- .slide: id="undo-revert-file" -->
+
+Problem: We made changes to `new_file.txt`, but want to change only this file on our computer back to how it looked on the most recent commit
+
+Solution:
+```
+git checkout -- new_file.txt
+```
+
+If you want to go back `n` commits, you can do
+```
+git checkout HEAD~n -- new_file.txt
+```
+instead
+
+~~~
+
+### Revert changes to last commit
 <!-- .slide: id="undo-to-most-recent-commit" -->
 
-Suppose you have modified `contributing.md`, and it is unstaged:
-```
-On branch my_branch
-  .....
-Changes not staged for commit:
-  (use "git add <file>..." to update what will be committed)
-  (use "git checkout -- <file>..." to discard changes in the working directory)
+Problem: We made changes, and messed everything up. We want to restore everything on our computer back to how it looked on the most recent commit.
 
-  modified:   contributing.md
+**Warning:** The following solution throws away your work and replaces it. You cannot undo this command. Be really, really sure!
+
+Solution:
 ```
-To revert the file, run
-```
-git checkout -- contributing.md
+git reset --hard
 ```
 
-If your file has been staged, you will want to follow the instructions for [unstaging a file]() first, then follow these steps. 
-
-~~~
-
-### Throw away all local changes, and restore my local copy back to a particular commit
-<!-- .slide: id="undo-to-given-commit" --> 
-
-Go to [merging](#/merging)
-
+You can also go back `n` commits using
+```
+git reset --hard HEAD~n
+```
 
